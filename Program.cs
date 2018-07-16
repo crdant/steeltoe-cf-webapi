@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
+using Pivotal.Extensions.Configuration.ConfigServer;
+
 namespace core_cf_webapi
 {
     public class Program
@@ -19,6 +21,8 @@ namespace core_cf_webapi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseCloudFoundryHosting()
+                .UseStartup<Startup>()
+                .AddConfigServer();
     }
 }

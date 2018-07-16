@@ -1,0 +1,13 @@
+---
+applications:
+- name: core-cf-webapi
+  random-route: true
+  buildpack: dotnet_core_buildpack
+  instances: 1
+  memory: 256M
+  # determines which environment to pull configs from
+  env:
+    ASPNETCORE_ENVIRONMENT: dev
+  services:
+  - steeltoe-demo-config
+  - steeltoe-demo-registry
