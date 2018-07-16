@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using Pivotal.Extensions.Configuration.ConfigServer;
+using Pivotal.Discovery.Client;
 
 namespace core_cf_webapi
 {
@@ -28,7 +29,9 @@ namespace core_cf_webapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddConfiguration(Configuration);
+            services.AddDiscoveryClient(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +48,8 @@ namespace core_cf_webapi
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseDiscoveryClient();
             
         }
     }
