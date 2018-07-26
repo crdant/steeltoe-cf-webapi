@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
-namespace bootcamp_webapi.Controllers
+namespace core_cf_webapi.Controllers
 {
     [Route("api/[controller]")]
     public class FailureController : Controller
