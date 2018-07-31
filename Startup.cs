@@ -9,7 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
+
+using Steeltoe.Security.Authentication.CloudFoundry;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Pivotal.Extensions.Configuration.ConfigServer;
 using Pivotal.Discovery.Client;
@@ -28,6 +31,16 @@ namespace core_cf_webapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+			// Add Cloud Foundry JWT Authentication service as the default
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddCloudFoundryJwtBearer(Configuration);
+            // Add authorization policies
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("group1", policy => policy.RequireClaim("groupname", "group1"));
+                options.AddPolicy("group2", policy => policy.RequireClaim("groupname", "group2"));
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddConfiguration(Configuration);

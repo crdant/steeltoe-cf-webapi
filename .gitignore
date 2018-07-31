@@ -3,3 +3,4 @@ obj
 obj/8
 bin
 bin/*
+.vs/

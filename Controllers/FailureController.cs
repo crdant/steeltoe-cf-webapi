@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace core_cf_webapi.Controllers
 {
+	[Authorize]
     [Route("api/[controller]")]
     public class FailureController : Controller
     {

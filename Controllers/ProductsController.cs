@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 using core_cf_webapi.Models;
 
 namespace core_cf_webapi.Controllers
 {
+	[Authorize]
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
