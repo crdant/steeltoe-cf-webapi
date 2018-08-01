@@ -11,3 +11,4 @@ applications:
   services:
   - steeltoe-demo-config
   - steeltoe-demo-registry
+  - demo1

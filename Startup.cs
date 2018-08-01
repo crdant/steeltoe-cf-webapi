@@ -35,11 +35,12 @@ namespace core_cf_webapi
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddCloudFoundryJwtBearer(Configuration);
             // Add authorization policies
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("group1", policy => policy.RequireClaim("groupname", "group1"));
-                options.AddPolicy("group2", policy => policy.RequireClaim("groupname", "group2"));
-            });
+
+            //services.AddAuthorization(options =>
+            //{
+               // options.AddPolicy("access", policy => policy.RequireClaim("scope", "openid"));
+              //  options.AddPolicy("group2", policy => policy.RequireClaim("groupname", "group2"));
+            //});
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

@@ -8,7 +8,6 @@ using core_cf_webapi.Models;
 
 namespace core_cf_webapi.Controllers
 {
-	[Authorize]
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
@@ -20,6 +19,7 @@ namespace core_cf_webapi.Controllers
         }
 
         // GET api/products
+		[Authorize]
         [HttpGet]
         public IEnumerable<Product> Get()
         {
