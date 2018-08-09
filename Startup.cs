@@ -31,20 +31,21 @@ namespace core_cf_webapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
 			// Add Cloud Foundry JWT Authentication service as the default
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddCloudFoundryJwtBearer(Configuration);
             // Add authorization policies
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("group1", policy => policy.RequireClaim("groupname", "group1"));
-                options.AddPolicy("group2", policy => policy.RequireClaim("groupname", "group2"));
+                options.AddPolicy("loggedin", policy => policy.RequireClaim("scope", "openid"));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddConfiguration(Configuration);
             services.AddDiscoveryClient(Configuration);
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,9 +60,16 @@ namespace core_cf_webapi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors(builder => 
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod();
+            });
+            
+            app.UseAuthentication();
             app.UseMvc();
 
+            // app.UseHttpsRedirection();
             app.UseDiscoveryClient();
             
         }
