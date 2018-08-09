@@ -8,7 +8,8 @@ applications:
   # determines which environment to pull configs from
   env:
     ASPNETCORE_ENVIRONMENT: dev
+    SSO_SCOPES: openid
   services:
   - steeltoe-demo-config
   - steeltoe-demo-registry
-  - steeltoe-demo-sso
+  - demo1
