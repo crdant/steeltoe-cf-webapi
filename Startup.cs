@@ -63,7 +63,7 @@ namespace core_cf_webapi
             // Shows UseCors with CorsPolicyBuilder.
             app.UseCors(builder => 
             {
-                builder.AllowAnyOrigin().AllowAnyMethod();
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             });
             
             app.UseAuthentication();
