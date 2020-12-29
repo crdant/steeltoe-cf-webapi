@@ -8,7 +8,6 @@ using core_cf_webapi.Models;
 
 namespace core_cf_webapi.Controllers
 {
-	[Authorize]
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
@@ -21,6 +20,8 @@ namespace core_cf_webapi.Controllers
 
         // GET api/products
         [HttpGet]
+        [HttpOptions]
+       	[Authorize(Policy = "LoggedIn")]
         public IEnumerable<Product> Get()
         {
             Console.WriteLine($"connection string is {_config["productdbconnstring"]}");
